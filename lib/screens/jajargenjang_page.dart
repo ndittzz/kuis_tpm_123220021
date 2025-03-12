@@ -1,36 +1,27 @@
 import 'package:flutter/material.dart';
 
-class TrapesiumPage extends StatefulWidget {
-  const TrapesiumPage({super.key});
+class JajarGenjangPage extends StatefulWidget {
+  const JajarGenjangPage({super.key});
 
   @override
-  TrapesiumPageState createState() => TrapesiumPageState();
+  JajarGenjangPageState createState() => JajarGenjangPageState();
 }
 
-class TrapesiumPageState extends State<TrapesiumPage> {
-  final TextEditingController atasController = TextEditingController();
-  final TextEditingController bawahController = TextEditingController();
+class JajarGenjangPageState extends State<JajarGenjangPage> {
+  final TextEditingController alasController = TextEditingController();
   final TextEditingController tinggiController = TextEditingController();
-  final TextEditingController sisiMiring1Controller = TextEditingController();
-  final TextEditingController sisiMiring2Controller = TextEditingController();
+  final TextEditingController sisiMiringController = TextEditingController();
   String result = "Hasil: 0.0";
   final int maxLength = 15;
 
   void calculateResult(String operation) {
-    double? atas = double.tryParse(atasController.text.replaceAll(',', '.'));
-    double? bawah = double.tryParse(bawahController.text.replaceAll(',', '.'));
+    double? alas = double.tryParse(alasController.text.replaceAll(',', '.'));
     double? tinggi =
         double.tryParse(tinggiController.text.replaceAll(',', '.'));
-    double? sisiMiring1 =
-        double.tryParse(sisiMiring1Controller.text.replaceAll(',', '.'));
-    double? sisiMiring2 =
-        double.tryParse(sisiMiring2Controller.text.replaceAll(',', '.'));
+    double? sisiMiring =
+        double.tryParse(sisiMiringController.text.replaceAll(',', '.'));
 
-    if (atas == null ||
-        bawah == null ||
-        tinggi == null ||
-        sisiMiring1 == null ||
-        sisiMiring2 == null) {
+    if (alas == null || tinggi == null || sisiMiring == null) {
       setState(() {
         result = "Masukkan semua angka dengan benar";
       });
@@ -39,21 +30,18 @@ class TrapesiumPageState extends State<TrapesiumPage> {
 
     setState(() {
       if (operation == 'luas') {
-        result = "Luas: ${((atas + bawah) * tinggi / 2).toStringAsFixed(2)}";
+        result = "Luas: ${(alas * tinggi).toStringAsFixed(2)}";
       } else if (operation == 'keliling') {
-        result =
-            "Keliling: ${(atas + bawah + sisiMiring1 + sisiMiring2).toStringAsFixed(2)}";
+        result = "Keliling: ${(2 * (alas + sisiMiring)).toStringAsFixed(2)}";
       }
     });
   }
 
   void clearInput() {
     setState(() {
-      atasController.clear();
-      bawahController.clear();
+      alasController.clear();
       tinggiController.clear();
-      sisiMiring1Controller.clear();
-      sisiMiring2Controller.clear();
+      sisiMiringController.clear();
       result = "Hasil: 0.0";
     });
   }
@@ -63,7 +51,7 @@ class TrapesiumPageState extends State<TrapesiumPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "HITUNG TRAPESIUM",
+          "HITUNG JAJAR GENJANG",
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         ),
@@ -110,21 +98,15 @@ class TrapesiumPageState extends State<TrapesiumPage> {
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF5B0583)),
+                            color: Colors.blue),
                       ),
                       const SizedBox(height: 15),
-                      inputField(atasController, "Sisi Atas (luas & keliling)"),
-                      const SizedBox(height: 15),
-                      inputField(
-                          bawahController, "Sisi Bawah (luas & keliling)"),
+                      inputField(alasController, "Alas (luas & keliling)"),
                       const SizedBox(height: 15),
                       inputField(tinggiController, "Tinggi (luas)"),
                       const SizedBox(height: 15),
                       inputField(
-                          sisiMiring1Controller, "Sisi Miring 1 (keliling)"),
-                      const SizedBox(height: 15),
-                      inputField(
-                          sisiMiring2Controller, "Sisi Miring 2 (keliling)"),
+                          sisiMiringController, "Sisi Miring (keliling)"),
                       const SizedBox(height: 15),
                       buttonRow(),
                       const SizedBox(height: 15),

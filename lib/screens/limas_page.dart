@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
-class KubusPage extends StatefulWidget {
-  const KubusPage({super.key});
+class LimasPage extends StatefulWidget {
+  const LimasPage({super.key});
 
   @override
-  KubusPageState createState() => KubusPageState();
+  LimasPageState createState() => LimasPageState();
 }
 
-class KubusPageState extends State<KubusPage> {
+class LimasPageState extends State<LimasPage> {
   final TextEditingController sisiController = TextEditingController();
+  final TextEditingController tinggiController = TextEditingController();
   String result = "Hasil: 0.0";
   final int maxLength = 15;
 
   void calculateResult(String operation) {
     double? sisi = double.tryParse(sisiController.text.replaceAll(',', '.'));
+    double? tinggi =
+        double.tryParse(tinggiController.text.replaceAll(',', '.'));
 
-    if (sisi == null) {
+    if (sisi == null || tinggi == null) {
       setState(() {
         result = "Masukkan angka dengan benar";
       });
@@ -24,9 +27,9 @@ class KubusPageState extends State<KubusPage> {
 
     setState(() {
       if (operation == 'volume') {
-        result = "Volume: ${(sisi * sisi * sisi).toStringAsFixed(2)}";
+        result = "Volume: ${(1 / 3 * sisi * sisi * tinggi).toStringAsFixed(2)}";
       } else if (operation == 'keliling') {
-        result = "Keliling: ${(12 * sisi).toStringAsFixed(2)}";
+        result = "Keliling: ${(4 * sisi).toStringAsFixed(2)}";
       }
     });
   }
@@ -34,6 +37,7 @@ class KubusPageState extends State<KubusPage> {
   void clearInput() {
     setState(() {
       sisiController.clear();
+      tinggiController.clear();
       result = "Hasil: 0.0";
     });
   }
@@ -43,7 +47,7 @@ class KubusPageState extends State<KubusPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "HITUNG KUBUS",
+          "HITUNG LIMAS",
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         ),
@@ -86,7 +90,7 @@ class KubusPageState extends State<KubusPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Text(
-                        "Masukkan Nilai Sisi",
+                        "Masukkan Nilai Sisi dan Tinggi",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -94,6 +98,8 @@ class KubusPageState extends State<KubusPage> {
                       ),
                       const SizedBox(height: 15),
                       inputField(sisiController, "Panjang Sisi"),
+                      const SizedBox(height: 15),
+                      inputField(tinggiController, "Tinggi"),
                       const SizedBox(height: 15),
                       buttonRow(),
                       const SizedBox(height: 15),
@@ -171,7 +177,7 @@ class KubusPageState extends State<KubusPage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.blue),
+        border: Border.all(color: Colors.black),
       ),
       child: Text(
         result,

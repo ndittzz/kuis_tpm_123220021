@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_123220021_mohamadrisqiaditiya/screens/profile_page.dart';
-import 'package:quiz_123220021_mohamadrisqiaditiya/screens/trapesium_page.dart';
-import 'package:quiz_123220021_mohamadrisqiaditiya/screens/kubus_page.dart';
+import 'package:quiz_123220021_mohamadrisqiaditiya/screens/jajargenjang_page.dart';
+import 'package:quiz_123220021_mohamadrisqiaditiya/screens/limas_page.dart';
 import 'package:quiz_123220021_mohamadrisqiaditiya/screens/hitung_hari_page.dart';
 import 'package:quiz_123220021_mohamadrisqiaditiya/screens/login_page.dart';
 
@@ -145,10 +145,12 @@ class MenuItem {
 final List<MenuItem> menuItems = [
   MenuItem(title: 'Profile', icon: Icons.person, page: ProfilePage()),
   MenuItem(
-      title: 'Hitung Trapesium', icon: Icons.calculate, page: TrapesiumPage()),
+      title: 'Hitung JajarGenjang',
+      icon: Icons.calculate,
+      page: JajarGenjangPage()),
   MenuItem(
-      title: 'Hitung Kubus',
+      title: 'Hitung Limas',
       icon: Icons.format_list_numbered,
-      page: KubusPage()),
+      page: LimasPage()),
   MenuItem(title: 'Hitung Hari', icon: Icons.numbers, page: HariPage()),
 ];
